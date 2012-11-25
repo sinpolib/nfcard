@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="bg_default">#FFBABABA</color>
+	<color name="bg_titlebar">#FF888888</color>
+	<color name="text_default">#FF505050</color>
+	<color name="text_alarm">#FF506650</color>
+	<color name="text_tip">#FFA0A0A0</color>
+	<color name="text_button">#FF3F3F3F</color>
+</resources>
+

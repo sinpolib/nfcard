@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">NFCard</string>
+	<string name="menu_clear">清屏</string>
+	<string name="menu_help">帮助</string>
+	<string name="menu_about">关于</string>
+	<string name="btn_copy">复制</string>
+	<string name="btn_nfc">设置</string>
+	<string name="btn_exit">退出</string>
+	<string name="tip_nfc_notfound">没有NFC硬件！</string>
+	<string name="tip_nfc_disabled">NFC已禁用</string>
+	<string name="tip_nfc_enabled">NFC已启用</string>	
+	<string name="msg_reading">读取中...</string>
+	<string name="msg_nonfc">没有找到NFC硬件，程序无法工作！</string>
+	<string name="msg_nfcdisabled">NFC已被禁用，请先启用该硬件。可以使用下边的 ‘设置’ 按钮控制NFC传感器的开关。</string>
+	<string name="msg_nocard">没有卡片信息，请将卡片靠近手机后盖尝试重新读取。</string>
+	<string name="msg_copied">卡片信息已经复制到剪贴板</string>
+	<string name="lab_id">标识：</string>
+	<string name="lab_pmm">参数：</string>
+	<string name="lab_serl">序号：</string>
+	<string name="lab_ver">版本：</string>
+	<string name="lab_date">生效：</string>
+	<string name="lab_op">使用：</string>
+	<string name="lab_log">交易记录：</string>
+	<string name="lab_balance">余额：</string>
+	<string name="lab_cur_cny">元</string>
+	<string name="lab_cur_hkd">港币</string>
+	<string name="lab_op_time">次</string>
+	<string name="lab_user_id">读者证号：</string>
+	<string name="lab_bktg_sn">书籍编号：</string>
+	<string name="lab_bkcat">书籍类别：</string>
+
+	<string name="name_bkcat_soc">社会科学</string>
+	<string name="name_bkcat_sci">自然科学</string>
+	<string name="name_bkcat_ltr">文学</string>
+	<string name="name_octopuscard">八达通卡（香港）</string>
+	<string name="name_szt">深圳通卡</string>
+	<string name="name_szt_f">深圳通卡（旧版）</string>
+	<string name="name_lnt">岭南通卡（羊城通）</string>
+	<string name="name_wht">武汉城市一卡通</string>
+	<string name="name_cac">长安通卡</string>
+	<string name="name_bj">北京市政交通卡</string>
+	<string name="name_bj_m">北京市政交通卡（旧版）</string>
+	<string name="name_unknowntag">未知的电子标签</string>
+	<string name="name_szlib_center">深圳图书馆（市民中心）</string>
+	<string name="name_szlib_nanshan">深圳图书馆（南山）</string>
+	<string name="name_lib_readercard">读者证</string>
+	<string name="name_lib_booktag">书籍标签</string>
+
+	<string name="info_help">
+	<![CDATA[
+	<div>使用前请先确认NFC传感器已经启用（可以通过“设置”按钮打开系统设置对话框进行调整）。</div>
+	<div>读卡时请将卡片靠近手机NFC传感器（一般是在手机后盖），并持续几秒种，以便程序读取信息。
+	</div><p />
+	<div>目前Android系统的NFC硬件与有些卡片的兼容性不是很好，读卡失败率较高，需要反复读取。有必要的时候请尝试关闭传感器硬件，然后重新启用。</div><p />
+	<div>已经确认可以读取的卡片有：深圳通卡（新版），香港八达通卡，深圳图书馆读者证，北京市政一卡通（新版），西安长安通卡，武汉城市一卡通。其他类型的卡有待测试。本程序源码公开，欢迎各地有兴趣的朋友帮助扩充支持的类型，可以直接修改代码或提供测试卡片。</div>
+	]]>
+	</string>
+
+	<string name="info_about">
+	<![CDATA[
+	<div><img src="icon_main,16,16" /><big>&nbsp;NFCard&nbsp;</big><version>v</version></div><p />
+	<div>NFCard程序使用NFC传感器读取非接触式IC卡，电子标签（如公交卡，银行卡，图书馆射频标贴等）中的信息。</div>
+	<div>支持符合iso7816-3 / iso15693 / felicia等国际标准的卡片，并且可以扩充支持一些专门标准（如中国的pboc2.0）</div>
+	<div>NFCard程序可以用来读取电子钱包（主要是公交卡）中未加密的余额，交易记录，电子标签中的标识等信息。</div><p />
+	<div>本程序开源/免费。允许自由传播和修改，具体的规则请遵照自由软件基金会的通用公共授权第三版（GUN GPLv3），参见<a href="http://www.gnu.org/licenses/">www.gnu.org/licenses</a>。</div><p />
+	<div>最新版的程序和源代码可以从<a href="http://code.google.com/p/nfcard/">code.google.com/p/nfcard</a>获取。</div><p /><p />
+	<div>作者：<a href="mailto:sinpowei@gmail.com">sinpo</a>, 2011.</div>
+	]]>
+	</string>
+</resources>

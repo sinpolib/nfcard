@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">NFCard</string>
+	<string name="menu_clear">Clear</string>
+	<string name="menu_help">Help</string>
+	<string name="menu_about">About</string>
+	<string name="btn_copy">Copy</string>
+	<string name="btn_nfc">Setting</string>
+	<string name="btn_exit">Exit</string>
+	<string name="tip_nfc_notfound">no nfc hardware!</string>
+	<string name="tip_nfc_disabled">nfc disabled</string>
+	<string name="tip_nfc_enabled">nfc enabled</string>	
+	<string name="msg_reading">Reading Card...</string>
+	<string name="msg_nonfc">No NFC hardware found, Program will NOT work.</string>
+	<string name="msg_nfcdisabled">NFC hardware has been disabled, Please enable it first. (using the \'Setting\' button to turn it on or off)</string>
+	<string name="msg_nocard">No Card been read, Please take the card near to the back cover of phone and try again</string>
+	<string name="msg_copied">Card information has been copied to clipboard
+	</string>
+	<string name="lab_id">ID:</string>
+	<string name="lab_pmm">PMm:</string>
+	<string name="lab_serl">SEL:</string>
+	<string name="lab_ver">VER:</string>
+	<string name="lab_date">DAT:</string>
+	<string name="lab_op">USE:</string>
+	<string name="lab_log">Log:</string>
+	<string name="lab_balance">Balance:</string>
+	<string name="lab_cur_cny">CNY</string>
+	<string name="lab_cur_hkd">HKD</string>
+	<string name="lab_op_time">Time(s)</string>
+	<string name="lab_user_id">Card SN:</string>
+	<string name="lab_bktg_sn">Book ID:</string>
+	<string name="lab_bkcat">Category:</string>
+
+	<string name="name_bkcat_soc">Natural sciences</string>
+	<string name="name_bkcat_sci">Social sciences</string>
+	<string name="name_bkcat_ltr">Literature</string>
+	<string name="name_octopuscard">Octopus Card (Hong Kong)</string>
+	<string name="name_szt">Shenzhen Tong</string>
+	<string name="name_szt_f">Shenzhen Tong (Old version)</string>
+	<string name="name_lnt">Yangcheng Tong</string>
+	<string name="name_wht">Wuhan City Smart Card</string>
+	<string name="name_cac">Changan Card</string>
+	<string name="name_bj">Beijing Municipal Card</string>
+	<string name="name_bj_m">Beijing Municipal Card (Old version)</string>
+	<string name="name_unknowntag">Unknown Tag</string>
+	<string name="name_szlib_center">Shenzhen Library (Center)</string>
+	<string name="name_szlib_nanshan">Shenzhen Library (Nanshan)</string>
+	<string name="name_lib_readercard">Reader\'s Card</string>
+	<string name="name_lib_booktag">Book\'s eTag</string>
+
+	<string name="info_help">
+	<![CDATA[
+	<div>Make sure that the NFC sensor is enaled before read card. You can click \'setting\' button to open system configure dialog to confirm.</div>
+	<div>When reading card, please take your card close to NFC sensor of phone (normally, it is at back cover of the phone) and hold a few seconds so that program can read data out.</div><p />
+	<div>phone\'s NFC hardware and os performance is not as good as expect currently, so it may need repeatedly read for whese kind of cards. (In case of always fail, You can try to disable NFC sensor and then re-enable it.)</div><p />
+	<div>So far we\'ve confirmed the following can be read: ShenzhenTong Card (newer version) of Shenzhen, Octopus Card of Hongkong, Reader Card of Shenzhen Library, Beijing Municipal Card (newer version), Changan Card of Shaanxi,Xi\'an, Wuhan City Smart Card. This is an open source application, welcome everyone participation in development,extends it to read more types of card, Also welcome provide test cards.</div>
+	]]>
+	</string>
+
+	<string name="info_about">
+	<![CDATA[
+	<div><img src="icon_main,16,16" /><big>&nbsp;NFCard&nbsp;</big><version>v</version></div><p />
+	<div>NFCard can read contactless IC card use NFC sensor.</div>
+	<div>Support a range of iso7816-3 / iso15693 / felicia compliant e-wallet / RFID cards, and can be extended to support many specific data protocol, e.g. pboc2.0 of china.</div>
+	<div>NFCard can read information like balance of account, transaction log, etc. from these cards </div><p />
+	<div>This is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version. see <a href="http://www.gnu.org/licenses/">www.gnu.org/licenses</a>.</div><p />
+	<div>Newest version and source code can be found at <a href="http://code.google.com/p/nfcard/">code.google.com/p/nfcard</a></div><p /><p />
+	<div>By <a href="mailto:sinpowei@gmail.com">sinpo</a>, 2011.</div>
+	]]>
+	</string>
+</resources>

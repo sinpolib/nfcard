@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="btn_height">50dp</dimen>
+	<dimen name="btn_width">100dp</dimen>
+	<dimen name="btn_margin">-3dp</dimen>
+	<dimen name="pnl_margin">6dp</dimen>
+	<dimen name="text_small">9.5dp</dimen>
+	<dimen name="text_middle">11.5dp</dimen>
+	<dimen name="text_big">28dp</dimen>
+</resources>
