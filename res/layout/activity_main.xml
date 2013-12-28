@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/window"
+    android:padding="@dimen/padding_window" >
+
+    <TextView
+        android:id="@+id/txtAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/padding_default"
+        android:layout_marginTop="@dimen/padding_default"
+        android:background="@null"
+        android:clickable="true"
+        android:onClick="onSwitch2AboutPage"
+        android:shadowColor="#B0B0B0"
+        android:shadowDx="-1"
+        android:shadowDy="-1"
+        android:shadowRadius="1"
+        android:text="@string/app_name"
+        android:textColor="#E0E0E0"
+        android:textSize="48sp" />
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/padding_default"
+        android:layout_marginLeft="@dimen/padding_default" >
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            style="@style/toolButton"
+            android:layout_marginLeft="@dimen/padding_default"
+            android:contentDescription="@null"
+            android:onClick="onSwitch2DefaultPage"
+            android:src="@drawable/back" />
+
+        <ImageButton
+            android:id="@+id/btnCopy"
+            style="@style/toolButton"
+            android:layout_marginLeft="@dimen/padding_default"
+            android:contentDescription="@null"
+            android:onClick="onCopyPageContent"
+            android:src="@drawable/copy" />
+
+        <ImageButton
+            android:id="@+id/btnReset"
+            style="@style/toolButton"
+            android:layout_marginLeft="@dimen/padding_default"
+            android:contentDescription="@null"
+            android:onClick="onSwitch2DefaultPage"
+            android:src="@drawable/reset" />
+    </LinearLayout>
+
+    <ViewSwitcher
+        android:id="@+id/switcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/txtAppName"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/padding_default"
+        android:animateFirstView="true"
+        android:background="@null"
+        android:inAnimation="@anim/fade_in"
+        android:outAnimation="@anim/fade_out" >
+
+        <ScrollView style="@style/textBoard" >
+
+            <TextView style="@style/textArea" />
+        </ScrollView>
+
+        <ScrollView style="@style/textBoard" >
+
+            <TextView style="@style/textArea" />
+        </ScrollView>
+    </ViewSwitcher>
+
+</RelativeLayout>

@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="btn_height">50dp</dimen>
-    <dimen name="btn_width">100dp</dimen>
-    <dimen name="btn_margin">-3dp</dimen>
-    <dimen name="pnl_margin">6dp</dimen>
-    <dimen name="text_small">12dp</dimen>
-    <dimen name="text_middle">15dp</dimen>
-    <dimen name="text_big">30dp</dimen>
+    <dimen name="padding_window">16dp</dimen>
+    <dimen name="padding_default">8dp</dimen>
 
+    <dimen name="tag_tip">22sp</dimen>
+	<dimen name="tag_action">18sp</dimen>
+	<dimen name="tag_h1">20sp</dimen>
+	<dimen name="tag_h2">18sp</dimen>
+	<dimen name="tag_h3">14sp</dimen>
+	<dimen name="tag_text">18sp</dimen>
+	<dimen name="tag_item">18sp</dimen>
+	<dimen name="tag_lab">18sp</dimen>
+	<dimen name="tag_parag">4dp</dimen>
+	<dimen name="tag_spliter">1.5dp</dimen>
+	
 </resources>

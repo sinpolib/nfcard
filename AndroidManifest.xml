@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sinpo.xnfc"
-    android:versionCode="1"
-    android:versionName="1.2.120228" >
+    android:versionCode="3"
+    android:versionName="2.0.131229" >
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="11" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.NFC" />
 
@@ -15,15 +15,22 @@
         android:required="true" />
 
     <application
-        android:icon="@drawable/ic_app_main"
-        android:label="@string/app_name" >
+        android:name="com.sinpo.xnfc.ThisApplication"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/nfcard"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="android.nfc.disable_beam_default"
+            android:value="true" />
+
         <activity
-            android:name="NFCard"
-            android:configChanges="keyboardHidden|orientation"
+            android:name="com.sinpo.xnfc.MainActivity"
+            android:alwaysRetainTaskState="false"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/nfcard"
+            android:stateNotNeeded="true"
             android:windowSoftInputMode="adjustUnspecified|stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
