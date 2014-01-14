@@ -23,10 +23,4 @@ final class ShenzhenTong extends StandardPboc {
 	protected SPEC.APP getApplicationId() {
 		return SPEC.APP.SHENZHENTONG;
 	}
-
-	@Override
-	protected byte[] getMainApplicationId() {
-		return new byte[] { (byte) 'P', (byte) 'A', (byte) 'Y',
-			(byte) '.', (byte) 'S', (byte) 'Z', (byte) 'T' };
-	}
 }

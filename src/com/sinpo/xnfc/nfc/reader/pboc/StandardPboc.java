@@ -29,8 +29,9 @@ import android.nfc.tech.IsoDep;
 
 @SuppressWarnings("unchecked")
 public abstract class StandardPboc {
-	private static Class<?>[] readers = { Quickpass.class, BeijingMunicipal.class,
-			ShenzhenTong.class, CityUnion.class, WuhanTong.class, };
+	private static Class<?>[][] readers = {
+			{ BeijingMunicipal.class, WuhanTong.class, ShenzhenTong.class,
+					CityUnion.class, }, { Quickpass.class, } };
 
 	public static void readCard(IsoDep tech, Card card)
 			throws InstantiationException, IllegalAccessException, IOException {
@@ -39,35 +40,38 @@ public abstract class StandardPboc {
 
 		tag.connect();
 
-		HINT hint = HINT.RESETANDGONEXT;
+		for (final Class<?> g[] : readers) {
+			HINT hint = HINT.RESETANDGONEXT;
 
-		for (final Class<?> r : readers) {
+			for (final Class<?> r : g) {
 
-			final StandardPboc reader = (StandardPboc) r.newInstance();
+				final StandardPboc reader = (StandardPboc) r.newInstance();
 
-			switch (hint) {
+				switch (hint) {
 
-			case RESETANDGONEXT:
-				if (!reader.resetTag(tag))
-					continue;
+				case RESETANDGONEXT:
+					if (!reader.resetTag(tag))
+						continue;
 
-			case GONEXT:
-				hint = reader.readCard(tag, card);
-				break;
+				case GONEXT:
+					hint = reader.readCard(tag, card);
+					break;
 
-			default:
-				break;
+				default:
+					break;
+				}
+
+				if (hint == HINT.STOP)
+					break;
 			}
-
-			if (hint == HINT.STOP)
-				break;
 		}
 
 		tag.close();
 	}
 
 	protected boolean resetTag(Iso7816.StdTag tag) throws IOException {
-		return tag.selectByName(DFN_PSE).isOkey();
+		return tag.selectByID(DFI_MF).isOkey()
+				|| tag.selectByName(DFN_PSE).isOkey();
 	}
 
 	protected enum HINT {
@@ -95,11 +99,18 @@ public abstract class StandardPboc {
 	protected abstract SPEC.APP getApplicationId();
 
 	protected byte[] getMainApplicationId() {
-		return DFI_MF;
+		return DFI_EP;
 	}
 
 	protected SPEC.CUR getCurrency() {
 		return SPEC.CUR.CNY;
+	}
+
+	protected boolean selectMainApplication(Iso7816.StdTag tag)
+			throws IOException {
+		final byte[] aid = getMainApplicationId();
+		return ((aid.length == 2) ? tag.selectByID(aid) : tag.selectByName(aid))
+				.isOkey();
 	}
 
 	protected HINT readCard(Iso7816.StdTag tag, Card card) throws IOException {
@@ -107,7 +118,7 @@ public abstract class StandardPboc {
 		/*--------------------------------------------------------------*/
 		// select Main Application
 		/*--------------------------------------------------------------*/
-		if (!tag.selectByName(getMainApplicationId()).isOkey())
+		if (!selectMainApplication(tag))
 			return HINT.GONEXT;
 
 		Iso7816.Response INFO, BALANCE;
@@ -145,16 +156,20 @@ public abstract class StandardPboc {
 		return HINT.STOP;
 	}
 
-	protected void parseBalance(Application app, Iso7816.Response data) {
-		if (!data.isOkey() || data.size() < 4) {
-			return;
+	protected void parseBalance(Application app, Iso7816.Response... data) {
+
+		int amount = 0;
+		for (Iso7816.Response rsp : data) {
+			if (rsp.isOkey() && rsp.size() >= 4) {
+				int n = Util.toInt(rsp.getBytes(), 0, 4);
+				if (n > 1000000 || n < -1000000)
+					n -= 0x80000000;
+
+				amount += n;
+			}
 		}
 
-		int n = Util.toInt(data.getBytes(), 0, 4);
-		if (n > 100000 || n < -100000)
-			n -= 0x80000000;
-
-		app.setProperty(SPEC.PROP.BALANCE, (n / 100.0f));
+		app.setProperty(SPEC.PROP.BALANCE, (amount / 100.0f));
 	}
 
 	protected void parseInfo21(Application app, Iso7816.Response data, int dec,

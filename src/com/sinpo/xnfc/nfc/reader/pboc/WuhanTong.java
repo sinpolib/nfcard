@@ -24,7 +24,6 @@ import com.sinpo.xnfc.nfc.bean.Application;
 import com.sinpo.xnfc.nfc.bean.Card;
 import com.sinpo.xnfc.nfc.tech.Iso7816;
 
-
 final class WuhanTong extends StandardPboc {
 
 	@Override
@@ -52,7 +51,7 @@ final class WuhanTong extends StandardPboc {
 			return HINT.GONEXT;
 
 		if (!(INFO = tag.readBinary(SFI_INFO)).isOkey())
-			return HINT.RESETANDGONEXT;
+			return HINT.GONEXT;
 
 		BALANCE = tag.getBalance(true);
 
@@ -85,7 +84,7 @@ final class WuhanTong extends StandardPboc {
 		parseLog24(app, LOG);
 
 		configApplication(app);
-		
+
 		card.addApplication(app);
 
 		return HINT.STOP;
@@ -101,8 +100,7 @@ final class WuhanTong extends StandardPboc {
 		}
 
 		final byte[] d = info.getBytes();
-		app.setProperty(SPEC.PROP.SERIAL,
-				Util.toHexString(sn.getBytes(), 0, 5));
+		app.setProperty(SPEC.PROP.SERIAL, Util.toHexString(sn.getBytes(), 0, 5));
 		app.setProperty(SPEC.PROP.VERSION, String.format("%02d", d[24]));
 		app.setProperty(SPEC.PROP.DATE, String.format(
 				"%02X%02X.%02X.%02X - %02X%02X.%02X.%02X", d[20], d[21], d[22],

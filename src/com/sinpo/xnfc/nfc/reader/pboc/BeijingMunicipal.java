@@ -24,7 +24,6 @@ import com.sinpo.xnfc.nfc.bean.Application;
 import com.sinpo.xnfc.nfc.bean.Card;
 import com.sinpo.xnfc.nfc.tech.Iso7816;
 
-
 final class BeijingMunicipal extends StandardPboc {
 
 	@Override
@@ -73,7 +72,7 @@ final class BeijingMunicipal extends StandardPboc {
 		parseInfo4(app, INFO, CNT);
 
 		parseLog24(app, LOG);
-		
+
 		configApplication(app);
 
 		card.addApplication(app);

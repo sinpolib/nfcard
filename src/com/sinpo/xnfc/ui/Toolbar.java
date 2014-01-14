@@ -52,7 +52,6 @@ public final class Toolbar {
 	public void show(int... buttons) {
 		hide();
 
-		// if (buttons != null)
 		showDelayed(1000, buttons);
 	}
 
