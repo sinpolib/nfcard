@@ -120,6 +120,10 @@ public class MainActivity extends Activity {
 		toolbar.copyPageContent(getFrontPage());
 	}
 
+	public void onSharePageContent(View view) {
+		toolbar.sharePageContent(getFrontPage());
+	}
+
 	private void loadDefaultPage() {
 		toolbar.show(null);
 
@@ -148,7 +152,7 @@ public class MainActivity extends Activity {
 		TextView ta = getBackPage();
 
 		if (NfcPage.isNormalInfo(intent)) {
-			toolbar.show(R.id.btnCopy, R.id.btnReset);
+			toolbar.show(R.id.btnCopy, R.id.btnShare, R.id.btnReset);
 			resetTextArea(ta, SPEC.PAGE.INFO, Gravity.LEFT);
 		} else {
 			toolbar.show(R.id.btnBack);

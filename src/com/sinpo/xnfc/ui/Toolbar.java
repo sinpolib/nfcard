@@ -18,8 +18,10 @@ package com.sinpo.xnfc.ui;
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.text.ClipboardManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -41,11 +43,23 @@ public final class Toolbar {
 
 	public void copyPageContent(TextView textArea) {
 		final CharSequence text = textArea.getText();
-		if (text != null) {
+		if (!TextUtils.isEmpty(text)) {
 			((ClipboardManager) textArea.getContext().getSystemService(
-					Context.CLIPBOARD_SERVICE)).setText(text);
+					Context.CLIPBOARD_SERVICE)).setText(text.toString());
 
 			ThisApplication.showMessage(R.string.info_main_copied);
+		}
+	}
+
+	public void sharePageContent(TextView textArea) {
+		final CharSequence text = textArea.getText();
+		if (!TextUtils.isEmpty(text)) {
+			Intent intent = new Intent();
+			intent.setAction(Intent.ACTION_SEND);
+			intent.putExtra(Intent.EXTRA_SUBJECT, ThisApplication.name());
+			intent.putExtra(Intent.EXTRA_TEXT, text.toString());
+			intent.setType("text/plain");
+			textArea.getContext().startActivity(intent);
 		}
 	}
 

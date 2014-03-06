@@ -47,6 +47,14 @@
             android:contentDescription="@null"
             android:onClick="onCopyPageContent"
             android:src="@drawable/copy" />
+        
+        <ImageButton
+            android:id="@+id/btnShare"
+            style="@style/toolButton"
+            android:layout_marginLeft="@dimen/padding_default"
+            android:contentDescription="@null"
+            android:onClick="onSharePageContent"
+            android:src="@drawable/share" />
 
         <ImageButton
             android:id="@+id/btnReset"

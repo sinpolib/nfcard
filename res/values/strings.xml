@@ -68,7 +68,6 @@
 	<br />NFCard can read contactless IC card use NFC hadware.<br />
 	<br />Support ISO7816-4, Felica compliant e-wallet, It can read account balance and transaction logs from these cards if no read restriction.<br />
 	<br />So far we\'ve confirmed the following can be read: ShenzhenTong Card (newer version) of Shenzhen, Shanghai Card, Octopus Card of Hongkong, Beijing Municipal Card (newer version), Changan Card of Shaanxi,Xi\'an, Wuhan City Smart Card, Quickpass (China UnionPay).<br />
-	<br />For more supported cards i recommend you try <a href="https://play.google.com/store/apps/details?id=me.pengpeng.ppme">PengpengMe</a><br />
 	<br />This is a free and opensource software. You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, Either version 3 of the license, or (at your option) any later version. See <a href="http://www.gnu.org/licenses/">www.gnu.org/licenses</a>.<br />
 	<br />Newest version and source code can be found at <a href="http://code.google.com/p/nfcard/">code.google.com/p/nfcard</a><br />
 	<br />By <a href="mailto:sinpowei@gmail.com">sinpowei</a>, 2014.</div>
