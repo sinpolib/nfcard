@@ -2,75 +2,79 @@
 <resources>
 
     <string name="app_name">NFCard</string>
-	<string name="font_oem1">fonts/oem1.ttf</string>
-	<string name="font_oem2">fonts/oem2.ttf</string>
-	<string name="font_oem3">fonts/oem3.ttf</string>
-	
-	<string name="spec_prop_id">Application</string>
-	<string name="spec_prop_serial">Serial:\u0020</string>
-	<string name="spec_prop_param">Parameter:\u0020</string>
-	<string name="spec_prop_version">Version:\u0020</string>
-	<string name="spec_prop_date">Validity:\u0020</string>
-	<string name="spec_prop_currency">Currency:\u0020</string>
-	<string name="spec_prop_count">Transactions:\u0020</string>
-	<string name="spec_prop_ecash">E-Cash:\u0020</string>
-	<string name="spec_prop_balance">Balance:\u0020</string>
-	<string name="spec_prop_tlimit">EC Single Transaction Limit:\u0020</string>
-	<string name="spec_prop_dlimit">EC Balance Limit:\u0020</string>
-	<string name="spec_prop_translog">Transaction Logs:</string>
-	<string name="spec_prop_access">Access denied</string>
-	<string name="spec_prop_exception">Error:</string>
-	
-	<string name="spec_cur_unknown"></string>
-	<string name="spec_cur_usd">USD</string>
-	<string name="spec_cur_cny">CNY</string>
-	<string name="spec_cur_hkd">HKD</string>
-	
-	<string name="spec_app_unknown">Unknown Application</string>
-	<string name="spec_app_shenzhentong">Shenzhen Tong</string>
-	<string name="spec_app_quickpass">QuickPass (China UnionPay)</string>
-	<string name="spec_app_octopus_hk">Octopus Card (Hong Kong)</string>
-	<string name="spec_app_changantong">Changan Tong</string>
-	<string name="spec_app_wuhantong">Wuhan City Smart Card</string>
-	<string name="spec_app_beijing">Beijing Municipal Card</string>
-	<string name="spec_app_shanghai">Shanghai Card</string>
-	<string name="spec_app_debit">Debit Card</string>
-	<string name="spec_app_credit">Credit Card</string>
-	<string name="spec_app_qcredit">Quasi-credit cards</string>
-    
-	<string name="info_nfc_notsupport"><![CDATA[
+    <string name="font_oem1">fonts/oem1.ttf</string>
+    <string name="font_oem2">fonts/oem2.ttf</string>
+    <string name="font_oem3">fonts/oem3.ttf</string>
+    <string name="spec_prop_id">Application</string>
+    <string name="spec_prop_serial">Serial:\u0020</string>
+    <string name="spec_prop_param">Parameter:\u0020</string>
+    <string name="spec_prop_version">Version:\u0020</string>
+    <string name="spec_prop_date">Validity:\u0020</string>
+    <string name="spec_prop_currency">Currency:\u0020</string>
+    <string name="spec_prop_count">Transactions:\u0020</string>
+    <string name="spec_prop_ecash">E-Cash:\u0020</string>
+    <string name="spec_prop_balance">Balance:\u0020</string>
+    <string name="spec_prop_tlimit">EC Single Transaction Limit:\u0020</string>
+    <string name="spec_prop_dlimit">EC Balance Limit:\u0020</string>
+    <string name="spec_prop_translog">Transaction Logs:</string>
+    <string name="spec_prop_access">Access denied</string>
+    <string name="spec_prop_exception">Error:</string>
+    <string name="spec_cur_unknown"></string>
+    <string name="spec_cur_usd">USD</string>
+    <string name="spec_cur_cny">CNY</string>
+    <string name="spec_cur_hkd">HKD</string>
+    <string name="spec_app_unknown">Unknown Application</string>
+    <string name="spec_app_shenzhentong">Shenzhen Tong</string>
+    <string name="spec_app_quickpass">QuickPass (China UnionPay)</string>
+    <string name="spec_app_octopus_hk">Octopus Card (Hong Kong)</string>
+    <string name="spec_app_changantong">Changan Tong</string>
+    <string name="spec_app_dongguantong">Dongguan Tong</string>
+    <string name="spec_app_wuhantong">Wuhan City Smart Card</string>
+    <string name="spec_app_beijing">Beijing Municipal Card</string>
+    <string name="spec_app_shanghai">Shanghai Card</string>
+    <string name="spec_app_debit">Debit Card</string>
+    <string name="spec_app_credit">Credit Card</string>
+    <string name="spec_app_qcredit">Quasi-credit cards</string>
+    <string name="info_nfc_notsupport">
+<![CDATA[
     <t_tip>No NFC hardware found, NFcard will NOT work.</t_tip>
-    ]]></string>
-    <string name="info_nfc_disabled"><![CDATA[   
+    ]]>
+    </string>
+    <string name="info_nfc_disabled">
+<![CDATA[   
     <t_tip>NFC hardware has been disabled, Please enable it first. <br /><br />Touch<b> <t_action_nfc>HERE</b></t_action_nfc> to turn it on.</t_tip>
-    ]]></string>
-    <string name="info_nfc_nocard"><![CDATA[
+    ]]>
+    </string>
+    <string name="info_nfc_nocard">
+<![CDATA[
     <t_tip>No card has been read, Please take the card near to the back cover of phone and try again.</t_tip>    
-    ]]></string>
-    
-    <string name="info_nfc_error"><![CDATA[
+    ]]>
+    </string>
+    <string name="info_nfc_error">
+<![CDATA[
     <t_tip>
     <b>Error occurred when reading card.</b><br />    
     When reading card, Please take your card close to the NFC antenna of phone (Normally, It is at back cover of the phone) and hold a few seconds so that program can read data out. If fails too much, you can try turn off then on NFC and read agian.<br />
 	</t_tip>
-    ]]></string>
-    
-    <string name="info_nfc_unknown"><![CDATA[
+    ]]>
+    </string>
+    <string name="info_nfc_unknown">
+<![CDATA[
     <t_tip><b>Unknown card.</b> <br />Touch <t_action_help><b>HERE</b></t_action_help> to see currently supported cards.</t_tip>
-    ]]></string>
-    
+    ]]>
+    </string>
     <string name="info_main_copied">Card information has been copied to clipboard</string>
-
-	<string name="info_main_about">
-	<![CDATA[
+    <string name="info_main_about">
+<![CDATA[
 	<div><t_head1><app /></t_head1> <version />
 	<br /><t_splitter><br />
 	<br />NFCard can read contactless IC card use NFC hadware.<br />
 	<br />Support ISO7816-4, Felica compliant e-wallet, It can read account balance and transaction logs from these cards if no read restriction.<br />
-	<br />So far we\'ve confirmed the following can be read: ShenzhenTong Card (newer version) of Shenzhen, Shanghai Card, Octopus Card of Hongkong, Beijing Municipal Card (newer version), Changan Card of Shaanxi,Xi\'an, Wuhan City Smart Card, Quickpass (China UnionPay).<br />
+	<br />So far we\'ve confirmed the following can be read: Shenzhen Tong (newer version) of Shenzhen, Shanghai Card, Octopus Card of Hongkong, Beijing Municipal Card (newer version), Changan Card of Shaanxi,Xi\'an, Dongguan Tong, Wuhan City Smart Card, Quickpass (China UnionPay).<br />
 	<br />This is a free and opensource software. You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, Either version 3 of the license, or (at your option) any later version. See <a href="http://www.gnu.org/licenses/">www.gnu.org/licenses</a>.<br />
 	<br />Newest version and source code can be found at <a href="http://code.google.com/p/nfcard/">code.google.com/p/nfcard</a><br />
 	<br />By <a href="mailto:sinpowei@gmail.com">sinpowei</a>, 2014.</div>
 	]]>
-	</string>
+    </string>
+
 </resources>

@@ -62,6 +62,8 @@ public final class SPEC {
 		BEIJINGMUNICIPAL(R.string.spec_app_beijing),
 		WUHANTONG(R.string.spec_app_wuhantong),
 		CHANGANTONG(R.string.spec_app_changantong),
+		// Added by horseluke<horseluke@126.com> 2014.3.31
+		DONGGUANTONG(R.string.spec_app_dongguantong),
 		SHANGHAIGJ(R.string.spec_app_shanghai),
 		DEBIT(R.string.spec_app_debit),
 		CREDIT(R.string.spec_app_credit),

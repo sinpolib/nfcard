@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">NFCard</string>
-	<string name="font_oem1">fonts/oem1.ttf</string>
-	<string name="font_oem2">fonts/oem2.ttf</string>
-	<string name="font_oem3">fonts/oem3.ttf</string>
-	
+
+    <string name="app_name">NFCard</string>
+    <string name="font_oem1">fonts/oem1.ttf</string>
+    <string name="font_oem2">fonts/oem2.ttf</string>
+    <string name="font_oem3">fonts/oem3.ttf</string>
     <string name="spec_prop_id">应用</string>
     <string name="spec_prop_serial">卡号：\u0020</string>
     <string name="spec_prop_param">参数：\u0020</string>
@@ -28,13 +28,13 @@
     <string name="spec_app_quickpass">银联闪付卡</string>
     <string name="spec_app_octopus_hk">香港八达通</string>
     <string name="spec_app_changantong">长安通</string>
+    <string name="spec_app_dongguantong">东莞通</string>
     <string name="spec_app_wuhantong">武汉城市一卡通</string>
     <string name="spec_app_beijing">北京市政交通卡</string>
     <string name="spec_app_shanghai">上海公交卡</string>
     <string name="spec_app_debit">借记卡</string>
-	<string name="spec_app_credit">信用卡</string>
-	<string name="spec_app_qcredit">准贷记卡</string>
-	
+    <string name="spec_app_credit">信用卡</string>
+    <string name="spec_app_qcredit">准贷记卡</string>
     <string name="info_nfc_notsupport">
 <![CDATA[
     <t_tip>没有找到NFC硬件，程序无法工作。</t_tip>
@@ -71,7 +71,7 @@
 	<br /><t_splitter><br />
 	<br />NFCard使用手机NFC读取非接触式IC卡中的信息。<br />
 	<br />支持ISO7816-4、Felica智能卡，用来读取电子钱包（主要是公交卡）中没有设置读取限制的余额、交易记录。<br />
-	<br />已经确认可以读出的卡片有：深圳通卡（新版）、上海公交卡、香港八达通卡、北京市政一卡通（新版）、西安长安通卡、武汉城市一卡通、银联闪付卡。<br />
+	<br />已经确认可以读出的卡片有：深圳通（新版）、上海公交卡、香港八达通、北京市政一卡通（新版）、西安长安通、东莞通、武汉城市一卡通、银联闪付卡。<br />
 	<br />本程序免费、开源。允许自由传播和修改，具体的规则请遵照自由软件基金会的通用公共授权第三版（GUN GPLv3），参见 <a href="http://www.gnu.org/licenses/">www.gnu.org/licenses</a>。<br />
 	<br />最新版的程序和源代码可以从<a href="http://code.google.com/p/nfcard/">code.google.com/p/nfcard</a>获取。<br />
 	<br />作者：<a href="mailto:sinpowei@gmail.com">sinpowei</a>, 2014.
