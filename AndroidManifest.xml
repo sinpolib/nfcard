@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sinpo.xnfc"
-    android:versionCode="11"
-    android:versionName="2.2.140412" >
+    android:versionCode="12"
+    android:versionName="2.2.150507" >
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.NFC" />
 
