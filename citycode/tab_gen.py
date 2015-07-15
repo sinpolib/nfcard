@@ -79,8 +79,7 @@ def gentab(src, dst):
 		if not line: break
 
 		m = p.match(line)
-		if not m:
-			raise Exception("not p.match(line): " + line)
+		if not m: raise Exception("not p.match(line): " + line)
 
 		# 构造树节点
 		node = reduce(lambda t, k: t[k], m.group(1), tree)
@@ -98,7 +97,7 @@ def gentab(src, dst):
 def writetree(tree, outf):
 	my_start = outf.tell()
 
-	city_name = tree["city_name"] if "city_name" in tree else ""
+	city_name = tree.pop("city_name", "")
 	name_len = len(city_name)
 
 	my_len = 3 * 10 + 1 + name_len
@@ -107,8 +106,7 @@ def writetree(tree, outf):
 	# 写入子节点
 	sub_address = [0 for x in range(10)]
 	for k in sorted(tree.keys()):
-		if k != "city_name": 
-			sub_address[int(k)] = writetree(tree[k], outf)
+		sub_address[int(k)] = writetree(tree[k], outf)
 
 	my_end = outf.tell()
 	outf.seek(my_start, os.SEEK_SET)
