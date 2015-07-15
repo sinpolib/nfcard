@@ -15,17 +15,18 @@ Additional permission under GNU GPL version 3 section 7 */
 
 package com.sinpo.xnfc.nfc.bean;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 
 import com.sinpo.xnfc.SPEC;
 
 public class Card extends Application {
 	public static final Card EMPTY = new Card();
 
-	private final ArrayList<Application> applications;
+	private final LinkedHashMap<Object, Application> applications;
 
 	public Card() {
-		applications = new ArrayList<Application>(2);
+		applications = new LinkedHashMap<Object, Application>(2);
 	}
 
 	public Exception getReadingException() {
@@ -44,13 +45,16 @@ public class Card extends Application {
 		return applications.size();
 	}
 
-	public final Application getApplication(int index) {
-		return applications.get(index);
+	public final Collection<Application> getApplications() {
+		return applications.values();
 	}
 
 	public final void addApplication(Application app) {
-		if (app != null)
-			applications.add(app);
+		if (app != null) {
+			Object id = app.getProperty(SPEC.PROP.ID);
+			if (id != null && !applications.containsKey(id))
+				applications.put(id, app);
+		}
 	}
 
 	public String toHtml() {

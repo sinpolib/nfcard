@@ -20,7 +20,7 @@
         android:shadowDy="-1"
         android:shadowRadius="1"
         android:text="@string/app_name"
-        android:textColor="#E0E0E0"
+        android:textColor="#E2E2D0"
         android:textSize="48sp" />
 
     <LinearLayout

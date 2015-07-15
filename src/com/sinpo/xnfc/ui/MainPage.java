@@ -55,9 +55,12 @@ public final class MainPage {
 		}
 
 		private void startNfcSettingsActivity() {
-			activity.startActivityForResult(new Intent(ACTION_SETTINGS), 0);
+			try {
+				activity.startActivityForResult(new Intent("android.settings.NFC_SETTINGS"), 0);
+			} catch (Exception e) {
+				activity.startActivityForResult(new Intent(ACTION_SETTINGS), 0);
+			}
 		}
-
 	}
 
 	private MainPage() {

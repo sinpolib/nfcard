@@ -16,6 +16,7 @@
     <string name="spec_prop_ecash">電子現金：\u0020</string>
     <string name="spec_prop_tlimit">單筆上限：\u0020</string>
     <string name="spec_prop_dlimit">圈存上限：\u0020</string>
+    <string name="spec_prop_olimit">透支上限：\u0020</string>
     <string name="spec_prop_translog">交易紀錄：</string>
     <string name="spec_prop_access">訪問受限</string>
     <string name="spec_prop_exception">錯誤：</string>
@@ -28,13 +29,16 @@
     <string name="spec_app_quickpass">銀聯閃付卡</string>
     <string name="spec_app_octopus_hk">香港八達通卡</string>
     <string name="spec_app_changantong">長安通</string>
-    <string name="spec_app_dongguantong">東莞通</string>
     <string name="spec_app_wuhantong">武漢城市一卡通</string>
     <string name="spec_app_beijing">北京市政交通卡</string>
     <string name="spec_app_shanghai">上海公交卡</string>
-    <string name="spec_app_debit">儲蓄卡</string>
-    <string name="spec_app_credit">信用卡</string>
-    <string name="spec_app_qcredit">准貸記卡</string>
+    <string name="spec_app_debit">儲蓄卡（閃付）</string>
+    <string name="spec_app_credit">信用卡（閃付）</string>
+    <string name="spec_app_qcredit">准貸記卡（閃付）</string>
+    <string name="spec_app_tunion_ep">交通聯合卡（基礎賬戶）</string>
+    <string name="spec_app_tunion_ec">交通聯合卡（擴展賬戶）</string>
+    <string name="spec_app_cityunion">城市一卡通（%1$s）</string>
+    <string name="spec_zip_unknown">未知城市</string>
     <string name="info_nfc_notsupport">
 <![CDATA[
     <t_tip>未能偵測NFC，NFCard只支援備有NFC的手機。</t_tip>
@@ -70,8 +74,8 @@
 	<t_head1><app /></t_head1> <version />
 	<br /><t_splitter><br />
 	<br />NFCard使用手機NFC讀取非接觸式IC卡中的資訊。<br />
-	<br />支援ISO7816-4、Felica智能卡，用來讀取電子錢包（主要是電子收費卡）中沒有設置讀取限制的餘額、交易記錄。<br />
-	<br />已經確認可以讀出的卡片有：深圳通（新版）、上海公交卡、香港八達通、北京市政一卡通（新版）、西安長安通、東莞通、武漢城市一卡通、銀聯閃付卡。<br />
+	<br />支援ISO7816-4、Felica智能卡，用於讀取電子錢包（主要是電子收費卡）、電子現金（如銀聯閃付卡）賬戶中沒有設定讀取限制的有效期、離線餘額、交易記錄。<br />
+	<br />已經確認可以讀出的卡片有：深圳通（新版）、上海公交卡、香港八達通、北京市政一卡通（新版）、長安通、武漢城市一卡通、銀聯閃付卡、交通聯合卡（包括電子現金）、城市一卡通互聯互通卡。<br />
 	<br />本程式免費、代碼公開。允許自由傳播和修改，具體的規則請遵照自由軟體基金會的通用公眾授權條款第三版（GNU GPLv3），參見 <a href="http://www.gnu.org/licenses/gpl.txt">www.gnu.org/licenses/gpl.txt</a>。<br />
 	<br />最新版的程式和代碼可以從<a href="https://github.com/sinpolib/nfcard/">github.com/sinpolib/nfcard</a>獲取。<br />
 	<br />作者：<a href="mailto:sinpowei@gmail.com">Sinpo Lib</a>, 2015.

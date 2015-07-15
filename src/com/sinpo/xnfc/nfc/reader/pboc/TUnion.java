@@ -24,48 +24,43 @@ import com.sinpo.xnfc.nfc.bean.Application;
 import com.sinpo.xnfc.nfc.bean.Card;
 import com.sinpo.xnfc.nfc.tech.Iso7816;
 
-final class WuhanTong extends StandardPboc {
+final class TUnion extends StandardPboc {
 
 	@Override
 	protected SPEC.APP getApplicationId() {
-		return SPEC.APP.WUHANTONG;
+		return SPEC.APP.TUNIONEP;
 	}
 
-	@Override
-	protected byte[] getMainApplicationId() {
-		return new byte[] { (byte) 0x41, (byte) 0x50, (byte) 0x31, (byte) 0x2E,
-				(byte) 0x57, (byte) 0x48, (byte) 0x43, (byte) 0x54,
-				(byte) 0x43, };
+	protected boolean resetTag(Iso7816.StdTag tag) throws IOException {
+		if (!tag.selectByID(DFI_MF).isOkey())
+			tag.selectByName(DFN_PSE).isOkey();
+
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected HINT readCard(Iso7816.StdTag tag, Card card) throws IOException {
 
-		Iso7816.Response INFO, SERL, BALANCE;
-
-		/*--------------------------------------------------------------*/
-		// read card info file, binary (5, 10)
-		/*--------------------------------------------------------------*/
-		if (!(SERL = tag.readBinary(SFI_SERL)).isOkey())
-			return HINT.GONEXT;
-
-		if (!(INFO = tag.readBinary(SFI_INFO)).isOkey())
-			return HINT.GONEXT;
-
-		BALANCE = tag.getBalance(0, true);
-
 		/*--------------------------------------------------------------*/
 		// select Main Application
 		/*--------------------------------------------------------------*/
-		if (!tag.selectByName(getMainApplicationId()).isOkey())
-			return HINT.RESETANDGONEXT;
+		if (!selectMainApplication(tag))
+			return HINT.GONEXT;
+
+		Iso7816.Response INFO, BALANCE, OVER, OVER_LIMIT;
+
+		/*--------------------------------------------------------------*/
+		// read card info file, binary (21)
+		/*--------------------------------------------------------------*/
+		INFO = tag.readBinary(SFI_EXTRA);
 
 		/*--------------------------------------------------------------*/
 		// read balance
 		/*--------------------------------------------------------------*/
-		if (!BALANCE.isOkey())
-			BALANCE = tag.getBalance(0, true);
+		BALANCE = tag.getBalance(0x03, true);
+		OVER = tag.getBalance(0x02, true);
+		OVER_LIMIT = tag.getBalance(0x01, true);
 
 		/*--------------------------------------------------------------*/
 		// read log file, record (24)
@@ -77,9 +72,9 @@ final class WuhanTong extends StandardPboc {
 		/*--------------------------------------------------------------*/
 		final Application app = createApplication();
 
-		parseBalance(app, BALANCE);
+		parseBalance(app, BALANCE, OVER, OVER_LIMIT);
 
-		parseInfo5(app, SERL, INFO);
+		parseInfo21(app, INFO, 4, true);
 
 		parseLog24(app, LOG);
 
@@ -90,20 +85,41 @@ final class WuhanTong extends StandardPboc {
 		return HINT.STOP;
 	}
 
-	private final static int SFI_INFO = 5;
-	private final static int SFI_SERL = 10;
+	@Override
+	protected byte[] getMainApplicationId() {
+		return new byte[] { (byte) 0xA0, (byte) 0x00, (byte) 0x00, (byte) 0x06, (byte) 0x32,
+				(byte) 0x01, (byte) 0x01, (byte) 0x05 };
+	}
 
-	private void parseInfo5(Application app, Iso7816.Response sn,
-			Iso7816.Response info) {
-		if (sn.size() < 27 || info.size() < 27) {
+	@Override
+	protected void parseInfo21(Application app, Iso7816.Response data, int dec, boolean bigEndian) {
+		if (!data.isOkey() || data.size() < 30) {
 			return;
 		}
 
-		final byte[] d = info.getBytes();
-		app.setProperty(SPEC.PROP.SERIAL, Util.toHexString(sn.getBytes(), 0, 5));
-		app.setProperty(SPEC.PROP.VERSION, String.format("%02d", d[24]));
-		app.setProperty(SPEC.PROP.DATE, String.format(
-				"%02X%02X.%02X.%02X - %02X%02X.%02X.%02X", d[20], d[21], d[22],
-				d[23], d[16], d[17], d[18], d[19]));
+		final byte[] d = data.getBytes();
+		String pan = Util.toHexString(d, 10, 10);
+		app.setProperty(SPEC.PROP.SERIAL, pan.substring(1));
+
+		if (d[9] != 0)
+			app.setProperty(SPEC.PROP.VERSION, String.valueOf(d[9]));
+
+		app.setProperty(SPEC.PROP.DATE, String.format("%02X%02X.%02X.%02X - %02X%02X.%02X.%02X",
+				d[20], d[21], d[22], d[23], d[24], d[25], d[26], d[27]));
+	}
+
+	@Override
+	protected void parseBalance(Application app, Iso7816.Response... data) {
+
+		float balance = parseBalance(data[0]);
+		if (balance < 0.01f) {
+			float over = parseBalance(data[1]);
+			if (over > 0.01f) {
+				balance -= over;
+				app.setProperty(SPEC.PROP.OLIMIT, parseBalance(data[2]));
+			}
+		}
+
+		app.setProperty(SPEC.PROP.BALANCE, balance);
 	}
 }

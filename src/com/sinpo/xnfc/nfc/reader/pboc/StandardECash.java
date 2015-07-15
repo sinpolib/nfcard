@@ -17,6 +17,8 @@ package com.sinpo.xnfc.nfc.reader.pboc;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.sinpo.xnfc.SPEC;
 import com.sinpo.xnfc.nfc.Util;
@@ -26,31 +28,30 @@ import com.sinpo.xnfc.nfc.tech.Iso7816;
 import com.sinpo.xnfc.nfc.tech.Iso7816.BerHouse;
 import com.sinpo.xnfc.nfc.tech.Iso7816.BerTLV;
 
-public class Quickpass extends StandardPboc {
-	protected final static byte[] DFN_PPSE = { (byte) '2', (byte) 'P',
-			(byte) 'A', (byte) 'Y', (byte) '.', (byte) 'S', (byte) 'Y',
-			(byte) 'S', (byte) '.', (byte) 'D', (byte) 'D', (byte) 'F',
-			(byte) '0', (byte) '1', };
+final class StandardECash extends StandardPboc {
+	protected final static byte[] DFN_PPSE = { (byte) '2', (byte) 'P', (byte) 'A', (byte) 'Y',
+			(byte) '.', (byte) 'S', (byte) 'Y', (byte) 'S', (byte) '.', (byte) 'D', (byte) 'D',
+			(byte) 'F', (byte) '0', (byte) '1', };
 
-	protected final static byte[] AID_DEBIT = { (byte) 0xA0, 0x00, 0x00, 0x03,
-			0x33, 0x01, 0x01, 0x01 };
-	protected final static byte[] AID_CREDIT = { (byte) 0xA0, 0x00, 0x00, 0x03,
-			0x33, 0x01, 0x01, 0x02 };
-	protected final static byte[] AID_QUASI_CREDIT = { (byte) 0xA0, 0x00, 0x00,
-			0x03, 0x33, 0x01, 0x01, 0x03 };
+	protected final static byte[] AID_DEBIT = { (byte) 0xA0, 0x00, 0x00, 0x03, 0x33, 0x01, 0x01,
+			0x01 };
+	protected final static byte[] AID_CREDIT = { (byte) 0xA0, 0x00, 0x00, 0x03, 0x33, 0x01, 0x01,
+			0x02 };
+	protected final static byte[] AID_QUASI_CREDIT = { (byte) 0xA0, 0x00, 0x00, 0x03, 0x33, 0x01,
+			0x01, 0x03 };
 
 	public final static short MARK_LOG = (short) 0xDFFF;
 
 	protected final static short[] TAG_GLOBAL = { (short) 0x9F79 /* 电子现金余额 */,
 			(short) 0x9F78 /* 电子现金单笔上限 */, (short) 0x9F77 /* 电子现金余额上限 */,
-			(short) 0x9F13 /* 联机ATC */, (short) 0x9F36 /* ATC */,
-			(short) 0x9F51 /* 货币代码 */, (short) 0x9F4F /* 日志文件格式 */,
-			(short) 0x9F4D /* 日志文件ID */, (short) 0x5A /* 帐号 */,
-			(short) 0x5F24 /* 失效日期 */, (short) 0x5F25 /* 生效日期 */, };
+			(short) 0x9F13 /* 联机ATC */, (short) 0x9F36 /* ATC */, (short) 0x9F51 /* 货币代码 */,
+			(short) 0x9F4F /* 日志文件格式 */, (short) 0x9F4D /* 日志文件ID */, (short) 0x5A /* 帐号 */,
+			(short) 0x5F24 /* 失效日期 */, (short) 0x5F25 /* 生效日期 */, (short) 0xDF63 /* 透支数目 */,
+			(short) 0xDF62 /* 透支上限 */, };
 
 	@Override
 	protected SPEC.APP getApplicationId() {
-		return SPEC.APP.QUICKPASS;
+		return SPEC.APP.UNKNOWN;
 	}
 
 	@Override
@@ -118,11 +119,15 @@ public class Quickpass extends StandardPboc {
 	}
 
 	private static void parseInfo(Application app, BerHouse tlvs) {
-		Object prop = parseString(tlvs, (short) 0x5A);
-		if (prop != null)
-			app.setProperty(SPEC.PROP.SERIAL, prop);
+		String pan = parseString(tlvs, (short) 0x5A);
+		if (pan != null) {
+			if (pan.length() > 19)
+				pan = pan.substring(0, 19);
 
-		prop = parseApplicationName(tlvs, (String) prop);
+			app.setProperty(SPEC.PROP.SERIAL, pan);
+		}
+
+		Object prop = parseApplicationName(tlvs, pan);
 		if (prop != null)
 			app.setProperty(SPEC.PROP.ID, prop);
 
@@ -150,13 +155,22 @@ public class Quickpass extends StandardPboc {
 		if (prop != null)
 			app.setProperty(SPEC.PROP.TLIMIT, prop);
 
-		prop = parseAmount(tlvs, (short) 0x9F79);
-		if (prop != null)
-			app.setProperty(SPEC.PROP.ECASH, prop);
+		Float balance = parseAmount(tlvs, (short) 0x9F79);
+		if (balance != null) {
+			if (balance < 0.01f) {
+				Float over = parseAmount(tlvs, (short) 0xDF63);
+				if (over != null && over > 0.01f) {
+					balance -= over;
+					Float limit = parseAmount(tlvs, (short) 0xDF62);
+					app.setProperty(SPEC.PROP.OLIMIT, limit);
+				}
+			}
+
+			app.setProperty(SPEC.PROP.ECASH, balance);
+		}
 	}
 
-	private ArrayList<Iso7816.ID> getApplicationIds(Iso7816.StdTag tag)
-			throws IOException {
+	private ArrayList<Iso7816.ID> getApplicationIds(Iso7816.StdTag tag) throws IOException {
 
 		final ArrayList<Iso7816.ID> ret = new ArrayList<Iso7816.ID>();
 
@@ -222,8 +236,8 @@ public class Quickpass extends StandardPboc {
 	 * return Arrays.copyOfRange(buff.array(), 0, buff.position()); }
 	 */
 
-	private static void collectTLVFromGlobalTags(Iso7816.StdTag tag,
-			BerHouse tlvs) throws IOException {
+	private static void collectTLVFromGlobalTags(Iso7816.StdTag tag, BerHouse tlvs)
+			throws IOException {
 
 		for (short t : TAG_GLOBAL) {
 			Iso7816.Response r = tag.getData(t);
@@ -232,8 +246,7 @@ public class Quickpass extends StandardPboc {
 		}
 	}
 
-	private static void collectTLVFromRecords(Iso7816.StdTag tag, BerHouse tlvs)
-			throws IOException {
+	private static void collectTLVFromRecords(Iso7816.StdTag tag, BerHouse tlvs) throws IOException {
 
 		// info files
 		for (int sfi = 1; sfi <= 10; ++sfi) {
@@ -273,14 +286,29 @@ public class Quickpass extends StandardPboc {
 	private static SPEC.APP parseApplicationName(BerHouse tlvs, String serial) {
 		String f = parseString(tlvs, (short) 0x84);
 		if (f != null) {
-			if (f.endsWith("010101"))
-				return SPEC.APP.DEBIT;
+			Matcher m = Pattern.compile("^([0-9A-F]{10})([0-9A-F]{6})").matcher(f);
+			if (m.find()) {
+				String rid = m.group(1);
+				String pix = m.group(2);
 
-			if (f.endsWith("010102"))
-				return SPEC.APP.CREDIT;
+				if ("A000000333".equals(rid)) {
+					if ("010101".equals(pix))
+						return SPEC.APP.DEBIT;
 
-			if (f.endsWith("010103"))
-				return SPEC.APP.QCREDIT;
+					if ("010102".equals(pix))
+						return SPEC.APP.CREDIT;
+
+					if ("010103".equals(pix))
+						return SPEC.APP.QCREDIT;
+
+				} else if ("A000000632".equals(rid)) {
+					if ("010105".equals(pix))
+						return SPEC.APP.TUNIONEP;
+
+					if ("010106".equals(pix))
+						return SPEC.APP.TUNIONEC;
+				}
+			}
 		}
 
 		return SPEC.APP.UNKNOWN;
@@ -300,8 +328,8 @@ public class Quickpass extends StandardPboc {
 		if (f == null || f.length != 3 || f[0] == 0 || f[0] == (byte) 0xFF)
 			return String.format("? - 20%02x.%02x.%02x", t[0], t[1], t[2]);
 
-		return String.format("20%02x.%02x.%02x - 20%02x.%02x.%02x", f[0], f[1],
-				f[2], t[0], t[1], t[2]);
+		return String.format("20%02x.%02x.%02x - 20%02x.%02x.%02x", f[0], f[1], f[2], t[0], t[1],
+				t[2]);
 	}
 
 	private static String parseString(BerHouse tlvs, short tag) {
@@ -343,8 +371,7 @@ public class Quickpass extends StandardPboc {
 		}
 
 		if (!ret.isEmpty())
-			app.setProperty(SPEC.PROP.TRANSLOG,
-					ret.toArray(new String[ret.size()]));
+			app.setProperty(SPEC.PROP.TRANSLOG, ret.toArray(new String[ret.size()]));
 	}
 
 	private static String parseLog(ArrayList<BerTLV> temp, byte[] data) {
@@ -397,16 +424,14 @@ public class Quickpass extends StandardPboc {
 				break;
 			}
 
-			String sd = (date <= 0) ? "****.**.**" : String.format(
-					"20%02d.%02d.%02d", (date / 10000) % 100,
-					(date / 100) % 100, date % 100);
-			String st = (time <= 0) ? "**:**" : String.format("%02d:%02d",
-					(time / 10000) % 100, (time / 100) % 100);
+			String sd = (date <= 0) ? "****.**.**" : String.format("20%02d.%02d.%02d",
+					(date / 10000) % 100, (date / 100) % 100, date % 100);
+			String st = (time <= 0) ? "**:**" : String.format("%02d:%02d", (time / 10000) % 100,
+					(time / 100) % 100);
 
 			final StringBuilder ret = new StringBuilder();
 
-			ret.append(String.format("%s %s %c%.2f", sd, st, sign,
-					amount / 100f));
+			ret.append(String.format("%s %s %c%.2f", sd, st, sign, amount / 100f));
 
 			return ret.toString();
 		} catch (Exception e) {

@@ -55,7 +55,7 @@ final class BeijingMunicipal extends StandardPboc {
 		if (!tag.selectByID(DFI_EP).isOkey())
 			return HINT.RESETANDGONEXT;
 
-		BALANCE = tag.getBalance(true);
+		BALANCE = tag.getBalance(0, true);
 
 		/*--------------------------------------------------------------*/
 		// read log file, record (24)

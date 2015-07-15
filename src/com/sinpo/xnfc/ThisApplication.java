@@ -15,6 +15,7 @@ Additional permission under GNU GPL version 3 section 7 */
 
 package com.sinpo.xnfc;
 
+import java.io.InputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 import com.sinpo.xnfc.R;
@@ -25,8 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
-public final class ThisApplication extends Application implements
-		UncaughtExceptionHandler {
+public final class ThisApplication extends Application implements UncaughtExceptionHandler {
 	private static ThisApplication instance;
 
 	@Override
@@ -49,8 +49,7 @@ public final class ThisApplication extends Application implements
 
 	public static String version() {
 		try {
-			return instance.getPackageManager().getPackageInfo(
-					instance.getPackageName(), 0).versionName;
+			return instance.getPackageManager().getPackageInfo(instance.getPackageName(), 0).versionName;
 		} catch (Exception e) {
 			return "1.0";
 		}
@@ -84,5 +83,32 @@ public final class ThisApplication extends Application implements
 
 	public static DisplayMetrics getDisplayMetrics() {
 		return instance.getResources().getDisplayMetrics();
+	}
+
+	public static byte[] loadRawResource(int resId) {
+		InputStream is = null;
+		try {
+			is = instance.getResources().openRawResource(resId);
+
+			int len = is.available();
+			byte[] raw = new byte[(int) len];
+
+			int offset = 0;
+			while (offset < raw.length) {
+				int n = is.read(raw, offset, raw.length - offset);
+				if (n < 0)
+					break;
+
+				offset += n;
+			}
+			return raw;
+		} catch (Throwable e) {
+			return null;
+		} finally {
+			try {
+				is.close();
+			} catch (Throwable ee) {
+			}
+		}
 	}
 }

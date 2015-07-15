@@ -30,11 +30,11 @@ import android.nfc.tech.IsoDep;
 @SuppressWarnings("unchecked")
 public abstract class StandardPboc {
 	private static Class<?>[][] readers = {
-			{ BeijingMunicipal.class, WuhanTong.class, ShenzhenTong.class,
-					CityUnion.class, }, { Quickpass.class, } };
+			{ BeijingMunicipal.class, WuhanTong.class, CityUnion.class, TUnion.class,
+					ShenzhenTong.class, }, { StandardECash.class, } };
 
-	public static void readCard(IsoDep tech, Card card)
-			throws InstantiationException, IllegalAccessException, IOException {
+	public static void readCard(IsoDep tech, Card card) throws InstantiationException,
+			IllegalAccessException, IOException {
 
 		final Iso7816.StdTag tag = new Iso7816.StdTag(tech);
 
@@ -70,8 +70,7 @@ public abstract class StandardPboc {
 	}
 
 	protected boolean resetTag(Iso7816.StdTag tag) throws IOException {
-		return tag.selectByID(DFI_MF).isOkey()
-				|| tag.selectByName(DFN_PSE).isOkey();
+		return tag.selectByID(DFI_MF).isOkey() || tag.selectByName(DFN_PSE).isOkey();
 	}
 
 	protected enum HINT {
@@ -81,10 +80,9 @@ public abstract class StandardPboc {
 	protected final static byte[] DFI_MF = { (byte) 0x3F, (byte) 0x00 };
 	protected final static byte[] DFI_EP = { (byte) 0x10, (byte) 0x01 };
 
-	protected final static byte[] DFN_PSE = { (byte) '1', (byte) 'P',
-			(byte) 'A', (byte) 'Y', (byte) '.', (byte) 'S', (byte) 'Y',
-			(byte) 'S', (byte) '.', (byte) 'D', (byte) 'D', (byte) 'F',
-			(byte) '0', (byte) '1', };
+	protected final static byte[] DFN_PSE = { (byte) '1', (byte) 'P', (byte) 'A', (byte) 'Y',
+			(byte) '.', (byte) 'S', (byte) 'Y', (byte) 'S', (byte) '.', (byte) 'D', (byte) 'D',
+			(byte) 'F', (byte) '0', (byte) '1', };
 
 	protected final static byte[] DFN_PXX = { (byte) 'P' };
 
@@ -96,7 +94,7 @@ public abstract class StandardPboc {
 	protected final static byte TRANS_CSU = 6;
 	protected final static byte TRANS_CSU_CPX = 9;
 
-	protected abstract SPEC.APP getApplicationId();
+	protected abstract Object getApplicationId();
 
 	protected byte[] getMainApplicationId() {
 		return DFI_EP;
@@ -106,11 +104,9 @@ public abstract class StandardPboc {
 		return SPEC.CUR.CNY;
 	}
 
-	protected boolean selectMainApplication(Iso7816.StdTag tag)
-			throws IOException {
+	protected boolean selectMainApplication(Iso7816.StdTag tag) throws IOException {
 		final byte[] aid = getMainApplicationId();
-		return ((aid.length == 2) ? tag.selectByID(aid) : tag.selectByName(aid))
-				.isOkey();
+		return ((aid.length == 2) ? tag.selectByID(aid) : tag.selectByName(aid)).isOkey();
 	}
 
 	protected HINT readCard(Iso7816.StdTag tag, Card card) throws IOException {
@@ -131,7 +127,7 @@ public abstract class StandardPboc {
 		/*--------------------------------------------------------------*/
 		// read balance
 		/*--------------------------------------------------------------*/
-		BALANCE = tag.getBalance(true);
+		BALANCE = tag.getBalance(0, true);
 
 		/*--------------------------------------------------------------*/
 		// read log file, record (24)
@@ -156,24 +152,28 @@ public abstract class StandardPboc {
 		return HINT.STOP;
 	}
 
-	protected void parseBalance(Application app, Iso7816.Response... data) {
+	protected float parseBalance(Iso7816.Response data) {
+		float ret = 0f;
+		if (data.isOkey() && data.size() >= 4) {
+			int n = Util.toInt(data.getBytes(), 0, 4);
+			if (n > 1000000 || n < -1000000)
+				n -= 0x80000000;
 
-		int amount = 0;
-		for (Iso7816.Response rsp : data) {
-			if (rsp.isOkey() && rsp.size() >= 4) {
-				int n = Util.toInt(rsp.getBytes(), 0, 4);
-				if (n > 1000000 || n < -1000000)
-					n -= 0x80000000;
-
-				amount += n;
-			}
+			ret = n / 100.0f;
 		}
-
-		app.setProperty(SPEC.PROP.BALANCE, (amount / 100.0f));
+		return ret;
 	}
 
-	protected void parseInfo21(Application app, Iso7816.Response data, int dec,
-			boolean bigEndian) {
+	protected void parseBalance(Application app, Iso7816.Response... data) {
+
+		float amount = 0f;
+		for (Iso7816.Response rsp : data)
+			amount += parseBalance(rsp);
+
+		app.setProperty(SPEC.PROP.BALANCE, amount);
+	}
+
+	protected void parseInfo21(Application app, Iso7816.Response data, int dec, boolean bigEndian) {
 		if (!data.isOkey() || data.size() < 30) {
 			return;
 		}
@@ -182,19 +182,16 @@ public abstract class StandardPboc {
 		if (dec < 1 || dec > 10) {
 			app.setProperty(SPEC.PROP.SERIAL, Util.toHexString(d, 10, 10));
 		} else {
-			final int sn = bigEndian ? Util.toIntR(d, 19, dec) : Util.toInt(d,
-					20 - dec, dec);
+			final int sn = bigEndian ? Util.toIntR(d, 19, dec) : Util.toInt(d, 20 - dec, dec);
 
-			app.setProperty(SPEC.PROP.SERIAL,
-					String.format("%d", 0xFFFFFFFFL & sn));
+			app.setProperty(SPEC.PROP.SERIAL, String.format("%d", 0xFFFFFFFFL & sn));
 		}
 
 		if (d[9] != 0)
 			app.setProperty(SPEC.PROP.VERSION, String.valueOf(d[9]));
 
-		app.setProperty(SPEC.PROP.DATE, String.format(
-				"%02X%02X.%02X.%02X - %02X%02X.%02X.%02X", d[20], d[21], d[22],
-				d[23], d[24], d[25], d[26], d[27]));
+		app.setProperty(SPEC.PROP.DATE, String.format("%02X%02X.%02X.%02X - %02X%02X.%02X.%02X",
+				d[20], d[21], d[22], d[23], d[24], d[25], d[26], d[27]));
 	}
 
 	protected boolean addLog24(final Iso7816.Response r, ArrayList<byte[]> l) {
@@ -213,8 +210,7 @@ public abstract class StandardPboc {
 		return true;
 	}
 
-	protected ArrayList<byte[]> readLog24(Iso7816.StdTag tag, int sfi)
-			throws IOException {
+	protected ArrayList<byte[]> readLog24(Iso7816.StdTag tag, int sfi) throws IOException {
 		final ArrayList<byte[]> ret = new ArrayList<byte[]>(MAX_LOG);
 		final Iso7816.Response rsp = tag.readRecord(sfi);
 		if (rsp.isOkey()) {
@@ -239,24 +235,21 @@ public abstract class StandardPboc {
 			for (final byte[] v : log) {
 				final int money = Util.toInt(v, 5, 4);
 				if (money > 0) {
-					final char s = (v[9] == TRANS_CSU || v[9] == TRANS_CSU_CPX) ? '-'
-							: '+';
+					final char s = (v[9] == TRANS_CSU || v[9] == TRANS_CSU_CPX) ? '-' : '+';
 
 					final int over = Util.toInt(v, 2, 3);
 					final String slog;
 					if (over > 0) {
 						slog = String
 								.format("%02X%02X.%02X.%02X %02X:%02X %c%.2f [o:%.2f] [%02X%02X%02X%02X%02X%02X]",
-										v[16], v[17], v[18], v[19], v[20],
-										v[21], s, (money / 100.0f),
-										(over / 100.0f), v[10], v[11], v[12],
+										v[16], v[17], v[18], v[19], v[20], v[21], s,
+										(money / 100.0f), (over / 100.0f), v[10], v[11], v[12],
 										v[13], v[14], v[15]);
 					} else {
-						slog = String
-								.format("%02X%02X.%02X.%02X %02X:%02X %C%.2f [%02X%02X%02X%02X%02X%02X]",
-										v[16], v[17], v[18], v[19], v[20],
-										v[21], s, (money / 100.0f), v[10],
-										v[11], v[12], v[13], v[14], v[15]);
+						slog = String.format(
+								"%02X%02X.%02X.%02X %02X:%02X %C%.2f [%02X%02X%02X%02X%02X%02X]",
+								v[16], v[17], v[18], v[19], v[20], v[21], s, (money / 100.0f),
+								v[10], v[11], v[12], v[13], v[14], v[15]);
 
 					}
 
@@ -266,8 +259,7 @@ public abstract class StandardPboc {
 		}
 
 		if (!ret.isEmpty())
-			app.setProperty(SPEC.PROP.TRANSLOG,
-					ret.toArray(new String[ret.size()]));
+			app.setProperty(SPEC.PROP.TRANSLOG, ret.toArray(new String[ret.size()]));
 	}
 
 	protected Application createApplication() {

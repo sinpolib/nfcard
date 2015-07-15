@@ -16,6 +16,7 @@
     <string name="spec_prop_ecash">电子现金：\u0020</string>
     <string name="spec_prop_tlimit">单笔上限：\u0020</string>
     <string name="spec_prop_dlimit">圈存上限：\u0020</string>
+    <string name="spec_prop_olimit">透支上限：\u0020</string>
     <string name="spec_prop_translog">交易记录：</string>
     <string name="spec_prop_access">访问受限</string>
     <string name="spec_prop_exception">错误：</string>
@@ -28,13 +29,16 @@
     <string name="spec_app_quickpass">银联闪付卡</string>
     <string name="spec_app_octopus_hk">香港八达通</string>
     <string name="spec_app_changantong">长安通</string>
-    <string name="spec_app_dongguantong">东莞通</string>
     <string name="spec_app_wuhantong">武汉城市一卡通</string>
     <string name="spec_app_beijing">北京市政交通卡</string>
     <string name="spec_app_shanghai">上海公交卡</string>
-    <string name="spec_app_debit">借记卡</string>
-    <string name="spec_app_credit">信用卡</string>
-    <string name="spec_app_qcredit">准贷记卡</string>
+    <string name="spec_app_debit">借记卡（闪付）</string>
+    <string name="spec_app_credit">信用卡（闪付）</string>
+    <string name="spec_app_qcredit">准贷记卡（闪付）</string>
+    <string name="spec_app_tunion_ep">交通联合卡（基础账户）</string>
+    <string name="spec_app_tunion_ec">交通联合卡（扩展账户）</string>
+    <string name="spec_app_cityunion">城市一卡通（%1$s）</string>
+    <string name="spec_zip_unknown">未知城市</string>
     <string name="info_nfc_notsupport">
 <![CDATA[
     <t_tip>没有找到NFC硬件，程序无法工作。</t_tip>
@@ -70,8 +74,8 @@
 	<t_head1><app /></t_head1> <version />
 	<br /><t_splitter><br />
 	<br />NFCard使用手机NFC读取非接触式IC卡中的信息。<br />
-	<br />支持ISO7816-4、Felica智能卡，用来读取电子钱包（主要是公交卡）中没有设置读取限制的余额、交易记录。<br />
-	<br />已经确认可以读出的卡片有：深圳通（新版）、上海公交卡、香港八达通、北京市政一卡通（新版）、西安长安通、东莞通、武汉城市一卡通、银联闪付卡。<br />
+	<br />支持ISO7816-4、Felica智能卡，用来读取电子钱包（主要是公交卡）、电子现金（如闪付卡）账户中没有设置读取限制的有效期、脱机余额、交易记录。<br />
+	<br />已经确认可以读出的卡片有：深圳通（新版）、上海公交卡、香港八达通、北京市政一卡通（新版）、长安通、武汉城市一卡通、银联闪付卡、交通联合卡（含电子现金）、城市一卡通互联互通卡。<br />
 	<br />本程序免费、开源。允许自由传播和修改，具体的规则请遵照自由软件基金会的通用公共授权第三版（GNU GPLv3），参见 <a href="http://www.gnu.org/licenses/gpl.txt">www.gnu.org/licenses/gpl.txt</a>。<br />
 	<br />最新版的程序和源代码可以从<a href="https://github.com/sinpolib/nfcard/">github.com/sinpolib/nfcard</a>获取。<br />
 	<br />作者：<a href="mailto:sinpowei@gmail.com">Sinpo Lib</a>, 2015.

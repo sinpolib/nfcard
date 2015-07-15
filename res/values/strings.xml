@@ -16,6 +16,7 @@
     <string name="spec_prop_balance">Balance:\u0020</string>
     <string name="spec_prop_tlimit">EC Single Transaction Limit:\u0020</string>
     <string name="spec_prop_dlimit">EC Balance Limit:\u0020</string>
+    <string name="spec_prop_olimit">Overdraft limit:\u0020</string>
     <string name="spec_prop_translog">Transaction Logs:</string>
     <string name="spec_prop_access">Access denied</string>
     <string name="spec_prop_exception">Error:</string>
@@ -28,13 +29,16 @@
     <string name="spec_app_quickpass">QuickPass (China UnionPay)</string>
     <string name="spec_app_octopus_hk">Octopus Card (Hong Kong)</string>
     <string name="spec_app_changantong">Changan Tong</string>
-    <string name="spec_app_dongguantong">Dongguan Tong</string>
     <string name="spec_app_wuhantong">Wuhan City Smart Card</string>
     <string name="spec_app_beijing">Beijing Municipal Card</string>
     <string name="spec_app_shanghai">Shanghai Card</string>
-    <string name="spec_app_debit">Debit Card</string>
-    <string name="spec_app_credit">Credit Card</string>
-    <string name="spec_app_qcredit">Quasi-credit cards</string>
+    <string name="spec_app_debit">Debit Card (QuickPass)</string>
+    <string name="spec_app_credit">Credit Card (QuickPass)</string>
+    <string name="spec_app_qcredit">Quasi-credit cards (QuickPass)</string>
+    <string name="spec_app_tunion_ep">T-Union (Base)</string>
+    <string name="spec_app_tunion_ec">T-Union (Expanded)</string>
+    <string name="spec_app_cityunion">City Union ( %1$s )</string>
+    <string name="spec_zip_unknown">Unknown city</string>
     <string name="info_nfc_notsupport">
 <![CDATA[
     <t_tip>No NFC hardware found, NFcard will NOT work.</t_tip>
@@ -69,8 +73,8 @@
 	<div><t_head1><app /></t_head1> <version />
 	<br /><t_splitter><br />
 	<br />NFCard can read contactless IC card use NFC hadware.<br />
-	<br />Support ISO7816-4, Felica compliant e-wallet, It can read account balance and transaction logs from these cards if no read restriction.<br />
-	<br />So far we\'ve confirmed the following can be read: Shenzhen Tong (newer version) of Shenzhen, Shanghai Card, Octopus Card of Hongkong, Beijing Municipal Card (newer version), Changan Card of Shaanxi,Xi\'an, Dongguan Tong, Wuhan City Smart Card, Quickpass (China UnionPay).<br />
+	<br />Support ISO7816-4, Felica compliant e-purse/e-cash, It can read account validity, offline balance and transaction logs from these cards if no read restriction.<br />
+	<br />So far we\'ve confirmed the following can be read: Shenzhen Tong (newer version) of Shenzhen, Shanghai Card, Octopus Card of Hongkong, Beijing Municipal Card (newer version), Changan Card of Shaanxi,Xi\'an, Wuhan City Smart Card, Quickpass (China, e-cash), T-Union (China, e-purse & e-cash), City Union (China).<br />
 	<br />This is a free and opensource software. You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, Either version 3 of the license, or (at your option) any later version. See <a href="http://www.gnu.org/licenses/gpl.txt">www.gnu.org/licenses/gpl.txt</a>.<br />
 	<br />Newest version and source code can be found at <a href="https://github.com/sinpolib/nfcard/">github.com/sinpolib/nfcard</a><br />
 	<br />By <a href="mailto:sinpowei@gmail.com">Sinpo Lib</a>, 2015.</div>

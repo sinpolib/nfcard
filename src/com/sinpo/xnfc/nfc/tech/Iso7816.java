@@ -518,10 +518,10 @@ public class Iso7816 {
 			return id;
 		}
 
-		public Response getBalance(boolean isEP) throws IOException {
+		public Response getBalance(int p1, boolean isEP) throws IOException {
 			final byte[] cmd = { (byte) 0x80, // CLA Class
 					(byte) 0x5C, // INS Instruction
-					(byte) 0x00, // P1 Parameter 1
+					(byte) p1, // P1 Parameter 1
 					(byte) (isEP ? 2 : 1), // P2 Parameter 2
 					(byte) 0x04, // Le
 			};

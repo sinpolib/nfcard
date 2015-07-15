@@ -15,6 +15,8 @@ Additional permission under GNU GPL version 3 section 7 */
 
 package com.sinpo.xnfc.nfc.bean;
 
+import java.util.Collection;
+
 import com.sinpo.xnfc.SPEC;
 
 public final class HtmlFormatter {
@@ -24,16 +26,19 @@ public final class HtmlFormatter {
 
 		startTag(ret, SPEC.TAG_BLK);
 
-		final int N = card.applicationCount();
+		Collection<Application> apps = card.getApplications();
 
-		for (int i = 0; i < N; ++i) {
+		boolean first = true;
+		for (Application app : apps) {
 
-			if (i > 0) {
+			if (first) {
+				first = false;
+			} else {
 				newline(ret);
 				newline(ret);
 			}
-			
-			formatApplicationInfo(ret, card.getApplication(i));
+
+			formatApplicationInfo(ret, app);
 		}
 
 		endTag(ret, SPEC.TAG_BLK);
@@ -57,8 +62,7 @@ public final class HtmlFormatter {
 		out.append("\n<").append(SPEC.TAG_SP).append(" />\n");
 	}
 
-	private static boolean formatProperty(StringBuilder out, String tag,
-			Object value) {
+	private static boolean formatProperty(StringBuilder out, String tag, Object value) {
 		if (value == null)
 			return false;
 
@@ -69,8 +73,7 @@ public final class HtmlFormatter {
 		return true;
 	}
 
-	private static boolean formatProperty(StringBuilder out, String tag,
-			Object prop, String value) {
+	private static boolean formatProperty(StringBuilder out, String tag, Object prop, String value) {
 		if (value == null || value.isEmpty())
 			return false;
 
@@ -85,8 +88,7 @@ public final class HtmlFormatter {
 		return true;
 	}
 
-	private static boolean formatApplicationInfo(StringBuilder out,
-			Application app) {
+	private static boolean formatApplicationInfo(StringBuilder out, Application app) {
 
 		if (!formatProperty(out, SPEC.TAG_H1, app.getProperty(SPEC.PROP.ID)))
 			return false;
@@ -97,36 +99,31 @@ public final class HtmlFormatter {
 
 		{
 			SPEC.PROP prop = SPEC.PROP.SERIAL;
-			if (formatProperty(out, SPEC.TAG_LAB, prop,
-					app.getStringProperty(prop)))
+			if (formatProperty(out, SPEC.TAG_LAB, prop, app.getStringProperty(prop)))
 				newline(out);
 		}
 
 		{
 			SPEC.PROP prop = SPEC.PROP.PARAM;
-			if (formatProperty(out, SPEC.TAG_LAB, prop,
-					app.getStringProperty(prop)))
+			if (formatProperty(out, SPEC.TAG_LAB, prop, app.getStringProperty(prop)))
 				newline(out);
 		}
 
 		{
 			SPEC.PROP prop = SPEC.PROP.VERSION;
-			if (formatProperty(out, SPEC.TAG_LAB, prop,
-					app.getStringProperty(prop)))
+			if (formatProperty(out, SPEC.TAG_LAB, prop, app.getStringProperty(prop)))
 				newline(out);
 		}
 
 		{
 			SPEC.PROP prop = SPEC.PROP.DATE;
-			if (formatProperty(out, SPEC.TAG_LAB, prop,
-					app.getStringProperty(prop)))
+			if (formatProperty(out, SPEC.TAG_LAB, prop, app.getStringProperty(prop)))
 				newline(out);
 		}
 
 		{
 			SPEC.PROP prop = SPEC.PROP.COUNT;
-			if (formatProperty(out, SPEC.TAG_LAB, prop,
-					app.getStringProperty(prop)))
+			if (formatProperty(out, SPEC.TAG_LAB, prop, app.getStringProperty(prop)))
 				newline(out);
 		}
 
@@ -161,15 +158,14 @@ public final class HtmlFormatter {
 				if (balance.isNaN()) {
 					out.append(SPEC.PROP.ACCESS);
 				} else {
-					formatProperty(out, SPEC.TAG_H2,
-							String.format("%.2f ", balance));
-					formatProperty(out, SPEC.TAG_LAB,
-							app.getProperty(SPEC.PROP.CURRENCY).toString());
+					formatProperty(out, SPEC.TAG_H2, String.format("%.2f ", balance));
+					formatProperty(out, SPEC.TAG_LAB, app.getProperty(SPEC.PROP.CURRENCY)
+							.toString());
 				}
 				newline(out);
 			}
 		}
-		
+
 		{
 			SPEC.PROP prop = SPEC.PROP.BALANCE;
 			Float balance = (Float) app.getProperty(prop);
@@ -179,12 +175,22 @@ public final class HtmlFormatter {
 				if (balance.isNaN()) {
 					out.append(SPEC.PROP.ACCESS);
 				} else {
-					formatProperty(out, SPEC.TAG_H2,
-							String.format("%.2f ", balance));
-					formatProperty(out, SPEC.TAG_LAB,
-							app.getProperty(SPEC.PROP.CURRENCY).toString());
+					formatProperty(out, SPEC.TAG_H2, String.format("%.2f ", balance));
+					formatProperty(out, SPEC.TAG_LAB, app.getProperty(SPEC.PROP.CURRENCY)
+							.toString());
 				}
 				newline(out);
+			}
+		}
+
+		{
+			SPEC.PROP prop = SPEC.PROP.OLIMIT;
+			Float balance = (Float) app.getProperty(prop);
+			if (balance != null && !balance.isNaN()) {
+				String cur = app.getProperty(SPEC.PROP.CURRENCY).toString();
+				String val = String.format("%.2f %s", balance, cur);
+				if (formatProperty(out, SPEC.TAG_LAB, prop, val))
+					newline(out);
 			}
 		}
 

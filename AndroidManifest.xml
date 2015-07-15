@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sinpo.xnfc"
-    android:versionCode="12"
-    android:versionName="2.2.150507" >
+    android:versionCode="13"
+    android:versionName="2.2.150715" >
 
     <uses-sdk
         android:minSdkVersion="10"
