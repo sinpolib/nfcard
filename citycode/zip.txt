@@ -1,0 +1,352 @@
+0100	Hohhot
+0103	Ordos
+0118	Wulanchabu
+0140	Inner Mongolia Baotou
+0144	Bayannaoer
+0160	Wuhai
+0210	Hulunbeir
+0240	Inner Mongolia Chifeng
+0260	Xilinguole
+0280	Tongliao
+0300	Taiyuan
+0305	Shanxi Luliang
+0306	Jinzhong
+0340	Shanxi Xinzhou
+0344	Shanxi Datong
+0360	Shanxi Shuozhou
+0410	Linfen
+0431	Shanxi Yuncheng
+0450	Yangquan
+0460	Shanxi Changzhi
+0480	Shanxi Jincheng
+0500	Shijiazhuang
+0530	Hebei Hengshui
+0540	Hebei Xingtai
+0560	Handan
+0610	Hebei Cangzhou
+0630	Tangshan
+0650	Hebei Langfang
+0660	Qinhuangdao
+0670	Hebei Chengde
+0710	Hebei Baoding
+0750	Zhangjiakou
+1000	Beijing
+1100	Shenyang
+1110	Liaoyang
+1120	Liaoning Tieling
+1130	Liaoning Fushun
+1140	Anshan
+1150	Liaoning Yingkou
+1160	Dalian
+1170	Benxi
+1180	Dandong
+1200	Jinzhou
+1220	Liaoning Chaoyang
+1230	Fuxin
+1240	Panjin
+1250	Huludao
+1300	Changchun
+1307	Siping
+1311	Jilin Songyuan
+1313	Jilin Baicheng
+1320	Jilin
+1330	Jilin Yanbian
+1340	Jilin Tonghua
+1343	Jilin Baishan
+1362	Jilin Liaoyuan
+1374	Xing'an League
+1500	Harbin
+1511	Heilongjiang Suihua
+1525	Yichun
+1540	Jiamusi
+1541	Hegang
+1545	Qitaihe
+1551	Heilongjiang Shuangyashan
+1570	Mudanjiang
+1581	Jixi
+1610	Qiqihar
+1614	Heihe
+1630	Daqing
+1650	Daxing'anling
+2000	Shanghai
+2100	Nanjing
+2120	Zhenjiang
+2130	Changzhou
+2140	Wuxi
+2150	Suzhou
+2210	Xuzhou
+2220	Jiangsu Lianyungang
+2230	Huai'an
+2236	Suqian
+2240	Yancheng
+2250	Yangzhou
+2253	Jiangsu Taizhou
+2260	Jiangsu Nantong
+2300	Hefei
+2313	Lu'an
+2315	Anhui Chaohu
+2320	Anhui Huainan
+2330	Bengbu
+2331	Chuzhou
+2335	Anhui Bozhou
+2340	Huaibei
+2340	Anhui Suzhou
+2360	Anhui Fuyang
+2410	Wuhu
+2420	Xuancheng
+2428	Anhui Chizhou
+2430	Maanshan
+2440	Tongling
+2450	Huangshan
+2460	Anqing
+2500	Shandong Jinan
+2511	Dezhou
+2517	Shandong Binzhou
+2520	Shandong Liaocheng
+2550	Shandong Zibo
+2570	Dongying
+2610	Shandong Weifang
+2614	Shandong Yantai
+2642	Weihai
+2660	Qingdao
+2710	Shandong Taian
+2711	Shandong Laiwu
+2720	Shandong Jining
+2733	Shandong Linyi
+2740	Heze
+2765	Shandong Rizhao
+2770	Shandong Zaozhuang
+3000	Tianjin
+3100	Hangzhou
+3118	Shaoxing
+3130	Zhejiang Huzhou
+3140	Zhejiang Jiaxing
+3150	Ningbo
+3160	Zhejiang Zhoushan
+3170	Zhejiang Taizhou
+3210	Zhejiang Jinhua
+3214	Zhejiang Lishui
+3230	Quzhou
+3250	Wenzhou
+3300	Nanchang
+3303	Jiangxi Jiujiang
+3306	Jiangxi Yichun
+3330	Jingdezhen
+3331	Jiangxi Shangrao
+3350	Yingtan
+3366	Jiangxi Xinyu
+3370	Jiangxi Pingxiang
+3410	Jiangxi Ganzhou
+3430	Ji'an
+3440	Jiangxi Fuzhou
+3500	Fujian Fuzhou
+3511	Fujian Putian
+3521	Fujian Ningde
+3530	Fujian Nanping
+3610	Fujian Xiamen
+3620	Fujian Quanzhou
+3623	Longyan
+3630	Fujian Zhangzhou
+3650	Fujian Sanming
+4000	Chongqing
+4100	Changsha
+4111	Hunan Xiangtan
+4120	Zhuzhou
+4130	Yiyang
+4140	Hunan Yueyang
+4150	Hunan Changde
+4160	Western Hunan
+4170	Loudi
+4180	Huaihua
+4200	Hunan Hengyang
+4220	Hunan Shaoyang
+4230	Chenzhou
+4250	Yongzhou
+4270	Hunan Zhangjiajie
+4300	Wuhan
+4316	Xiaogan
+4317	Hubei Tianmen
+4318	Jingmen
+4330	Hubei Xiantao
+4331	Hubei Qianjiang
+4332	Jingzhou
+4350	Hubei Huangshi
+4353	Hubei Huanggang
+4360	Hubei Ezhou
+4370	Hubei Xianning
+4410	Hubei Xiangyang
+4413	Hubei Suizhou
+4420	Shiyan
+4424	Hubei Shennongjia
+4430	Hubei Yichang
+4443	Hubei Enshi
+4500	Zhengzhou
+4530	Xinxiang
+4540	Henan Jiaozuo
+4540	Henan Jiyuan
+4550	Henan Anyang
+4562	Henan Hebi
+4570	Henan Puyang
+4610	Xuchang
+4613	Zhoukou
+4620	Henan Luohe
+4625	Pingdingshan
+4630	Zhumadian
+4640	Henan Xinyang
+4710	Luoyang
+4720	Henan Sanmenxia
+4730	Henan Nanyang
+4750	Henan Kaifeng
+4760	Henan Shangqiu
+5100	Guangzhou
+5100	Guangdong Jieyang
+5111	Guangdong Shaoguan
+5115	Guangdong Qingyuan
+5122	Guangdong Huizhou
+5140	Guangdong Meizhou
+5150	Guangdong Shantou
+5151	Shenzhen
+5156	Guangdong Chaozhou
+5164	Guangdong Shanwei
+5170	Guangdong Heyuan
+5190	Guangdong Zhuhai
+5230	Guangdong Dongguan
+5240	Guangdong Zhanjiang
+5250	Guangdong Maoming
+5260	Guangdong Zhaoqing
+5271	Guangdong Yunfu
+5280	Guangdong Foshan
+5284	Guangdong Zhongshan
+5290	Guangdong Jiangmen
+5295	Guangdong Yangjiang
+5300	Nanning
+5314	Guangxi Baise
+5321	Guangxi Chongzuo
+5350	Guangxi Qinzhou
+5355	Guangxi Fangchenggang
+5360	Guangxi Beihai
+5370	Guangxi Yulin
+5371	Guangxi Guigang
+5410	Guilin
+5426	Guangxi Hezhou
+5430	Guangxi Wuzhou
+5450	Guangxi Liuzhou
+5457	Guangxi Laibin
+5463	Guangxi Hechi
+5500	Guizhou Guiyang
+5501	Guizhou Qiannan
+5515	Guizhou Bijie
+5530	Guizhou Liupanshui
+5540	Guizhou Tongren
+5560	Guizhou Province
+5610	Guizhou Anshun
+5614	Southwest Guizhou
+5630	Zunyi
+5701	Haikou
+5712	Qionghai
+5713	Hainan Wenchang
+5715	Wanning
+5717	Danzhou
+5720	Sanya
+5722	Wuzhishan
+5726	Hainan East
+6100	Chengdu
+6131	Sichuan Leshan
+6150	Sichuan Liangshan
+6170	Panzhihua
+6180	Sichuan Deyang
+6200	Sichuan Meishan
+6210	Sichuan Mianyang
+6230	Sichuan Aba
+6250	Sichuan Ya'an
+6260	Sichuan Ganzi
+6280	Sichuan Guangyuan
+6290	Sichuan Suining
+6347	Sichuan Nanchong
+6350	Sichuan Dazhou
+6360	Sichuan Bazhong
+6380	Sichuan Guang'an
+6410	Sichuan Neijiang
+6413	Sichuan Ziyang
+6430	Sichuan Zigong
+6440	Sichuan Yibin
+6460	Sichuan Luzhou
+6500	Kunming
+6511	Yunnan Yuxi
+6542	Yunnan Qujing
+6546	Yunnan Zhaotong
+6610	Yunnan Honghe
+6630	Yunnan Wenshan
+6650	Yunnan Pu'er
+6661	Xishuangbanna
+6710	Yunnan Dali
+6714	Yunnan Nujiang
+6741	Yunnan Lijiang
+6744	Yunnan Diqing
+6750	Yunnan Chuxiong
+6758	Yunnan Lincang
+6780	Yunnan Baoshan
+6784	Yunnan Dehong
+7100	Xi'an
+7112	Xianyang
+7117	Shaanxi Weinan
+7157	Yan'an
+7180	Shaanxi Yulin
+7210	Baoji
+7230	Hanzhong
+7250	Shaanxi Ankang
+7260	Shaanxi Shangluo
+7270	Shaanxi Tongchuan
+7300	Lanzhou
+7304	Baiyin
+7304	Linxia
+7330	Wuwei
+7340	Gansu Zhangye
+7350	Jiuquan
+7351	Jiayuguan
+7370	Jinchang
+7410	Tianshui
+7421	Longnan
+7430	Gansu Dingxi
+7434	Pingliang
+7445	Qingyang
+7463	Gannan
+7500	Yinchuan
+7503	Alxa League
+7511	Wuzhong
+7530	Shizuishan
+7550	Zhongwei
+7560	Guyuan
+8100	Xining
+8102	Qinghai Haibei
+8105	Qinghai Haidong
+8112	Qinghai Huangnan
+8117	Qinghai Hainan
+8135	Qinghai Golog
+8150	Qinghai Yushu
+8160	Qinghai Haixi
+8300	Urumqi
+8311	Xinjiang Changji
+8320	Xinjiang Shihezi
+8321	Xinjiang Tacheng
+8332	Xinjiang Yili
+8333	Xinjiang Bortala
+8336	Xinjiang Karamay
+8360	Xinjiang Altay
+8360	Xinjiang Beitun
+8380	Xinjiang Turpan
+8390	Xinjiang Hami
+8410	Xinjiang Bayinguoleng
+8420	Xinjiang Aksu
+8433	Xinjiang Alar
+8435	Xinjiang Kizilsu Kirghiz
+8438	Xinjiang Kashi
+8439	Xinjiang Tumushuke
+8451	Tibet Hotan
+8500	Tibet Lhasa
+8507	Tibet Shannan
+8520	Tibet Naqu
+8540	Tibet Qamdo
+8570	Tibet Shigatse
+8590	Tibet Ali
+8600	Tibet inzhi
