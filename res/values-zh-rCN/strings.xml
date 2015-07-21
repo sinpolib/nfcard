@@ -57,14 +57,14 @@
     <string name="info_nfc_error">
 <![CDATA[
     <t_tip>
-    <b>读卡过程中发生错误。</b><br />
-    读卡时请将卡片靠近手机后盖上的NFC天线并持续几秒种，以便程序读取信息。多次失败时可以尝试关闭NFC然后重新打开，请勿过早移开卡片。<br />
+    <b>读卡过程中发生错误</b><br />
+    读卡时请将卡片靠近手机后盖上的NFC天线并持续几秒钟，以便程序读取信息。多次失败时可以尝试关闭NFC然后重新打开，请勿过早移开卡片。<br />
 	</t_tip>
     ]]>
     </string>
     <string name="info_nfc_unknown">
 <![CDATA[
-    <t_tip><b>未知卡片。</b> <br />可在<t_action_help><b>这里</b></t_action_help>查看支持的卡片类型。</t_tip>
+    <t_tip><b>未知卡片</b> <br />可在<t_action_help><b>这里</b></t_action_help>查看支持的卡片类型。</t_tip>
     ]]>
     </string>
     <string name="info_main_copied">卡片信息已经拷贝到剪贴板</string>

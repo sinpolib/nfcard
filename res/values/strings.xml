@@ -57,14 +57,14 @@
     <string name="info_nfc_error">
 <![CDATA[
     <t_tip>
-    <b>Error occurred when reading card.</b><br />    
+    <b>Error occurred when reading card</b><br />    
     When reading card, Please take your card close to the NFC antenna of phone (Normally, It is at back cover of the phone) and hold a few seconds so that program can read data out. If fails too much, you can try turn off then on NFC and read agian.<br />
 	</t_tip>
     ]]>
     </string>
     <string name="info_nfc_unknown">
 <![CDATA[
-    <t_tip><b>Unknown card.</b> <br />Touch <t_action_help><b>HERE</b></t_action_help> to see currently supported cards.</t_tip>
+    <t_tip><b>Unknown card</b> <br />Touch <t_action_help><b>HERE</b></t_action_help> to see currently supported cards.</t_tip>
     ]]>
     </string>
     <string name="info_main_copied">Card information has been copied to clipboard</string>
