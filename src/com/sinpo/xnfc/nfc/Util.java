@@ -106,7 +106,12 @@ public final class Util {
 
 		long N = 0xFFFFFFFFL & n;
 		while (N != 0) {
-			ret.append((int) (N % 100));
+			int temp = (int) (N % 100);
+			if (temp < 10) {
+				ret.append("0").append(temp);
+			} else {
+				ret.append(temp);
+			}
 			N /= 100;
 		}
 
